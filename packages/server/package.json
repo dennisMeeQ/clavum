@@ -1,0 +1,26 @@
+{
+  "name": "@clavum/server",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Clavum server — API + approval coordination",
+  "type": "module",
+  "main": "dist/index.js",
+  "scripts": {
+    "dev": "tsx watch src/index.ts",
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@clavum/crypto": "workspace:*",
+    "@hono/node-server": "^1.13.0",
+    "@prisma/client": "^6.3.0",
+    "hono": "^4.7.0"
+  },
+  "devDependencies": {
+    "prisma": "^6.3.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}

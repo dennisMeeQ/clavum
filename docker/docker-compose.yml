@@ -1,0 +1,26 @@
+services:
+  postgres:
+    image: postgres:17-alpine
+    environment:
+      POSTGRES_USER: clavum
+      POSTGRES_PASSWORD: clavum_dev
+      POSTGRES_DB: clavum
+    ports:
+      - "5434:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  server:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+    ports:
+      - "3100:3100"
+    environment:
+      DATABASE_URL: postgresql://clavum:clavum_dev@postgres:5432/clavum
+      PORT: "3100"
+    depends_on:
+      - postgres
+
+volumes:
+  pgdata:

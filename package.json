@@ -1,0 +1,10 @@
+{
+  "name": "clavum",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Secret management for AI agents",
+  "license": "AGPL-3.0-only",
+  "engines": {
+    "node": ">=22"
+  }
+}

@@ -1,0 +1,23 @@
+{
+  "name": "@clavum/cli",
+  "version": "0.0.1",
+  "private": true,
+  "description": "Clavum CLI — agent-side secret management",
+  "type": "module",
+  "bin": {
+    "clavum": "dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@clavum/crypto": "workspace:*",
+    "better-sqlite3": "^11.8.0"
+  },
+  "devDependencies": {
+    "@types/better-sqlite3": "^7.6.0",
+    "typescript": "^5.7.0",
+    "vitest": "^3.0.0"
+  }
+}
