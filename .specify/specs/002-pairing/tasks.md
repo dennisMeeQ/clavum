@@ -2,7 +2,7 @@
 
 **Depends on:** 001 (crypto core must be complete)
 
-## Task 1: Prisma schema update + migrations
+## Task 1: Prisma schema update + migrations ✅
 - Add PairingInvitation model to `prisma/schema.prisma`:
   - id, tenant_id, token (unique), type (agent|phone), expires_at, used, created_at
 - Run `prisma migrate dev` to create migration
