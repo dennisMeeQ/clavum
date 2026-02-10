@@ -1,7 +1,10 @@
 /**
  * Request signing and approval verification.
+ *
+ * Uses Node.js built-in crypto only.
  */
 
+import { randomBytes } from 'node:crypto';
 import { kdf } from './kdf.js';
 import { ed25519 } from './keys.js';
 
@@ -11,7 +14,7 @@ export const signatures = {
   /**
    * Sign an API request.
    *
-   * Payload: timestamp ‖ ":" ‖ method ‖ ":" ‖ path ‖ ":" ‖ SHA256(body)
+   * Payload: timestamp ‖ ":" ‖ method ‖ ":" ‖ path ‖ ":" ‖ hex(SHA256(body))
    */
   signRequest(
     privateKey: Uint8Array,
@@ -41,7 +44,7 @@ export const signatures = {
     maxAgeMs: number = 60_000,
   ): boolean {
     // Check replay window
-    const requestTime = parseInt(timestamp, 10);
+    const requestTime = Number.parseInt(timestamp, 10);
     const now = Date.now();
     if (Number.isNaN(requestTime) || Math.abs(now - requestTime) > maxAgeMs) {
       return false;
@@ -60,7 +63,7 @@ export const signatures = {
    * challenge = random(32) ‖ secretId ‖ SHA256(reason)
    */
   buildChallenge(secretId: string, reason: string, nonce?: Uint8Array): Uint8Array {
-    const actualNonce = nonce ?? crypto.getRandomValues(new Uint8Array(32));
+    const actualNonce = nonce ?? randomBytes(32);
     const secretIdBytes = encoder.encode(secretId);
     const reasonHash = kdf.hash(encoder.encode(reason));
 

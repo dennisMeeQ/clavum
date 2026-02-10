@@ -47,7 +47,7 @@ Clavum is a security product. Every design decision, code change, and feature mu
 
 ### VI. Simplicity Over Cleverness
 - Prefer well-understood primitives (AES-256-GCM, X25519, Ed25519, HKDF-SHA256)
-- No custom crypto — use audited libraries (`@noble/curves`, `@noble/hashes`)
+- No custom crypto — use platform standards (Node `crypto`, WebCrypto API). Zero external crypto dependencies.
 - One tool per job: Biome for lint+format, Vitest for tests, Prisma for DB
 - Start with the simplest correct implementation, optimize later
 
@@ -65,7 +65,7 @@ Clavum is a security product. Every design decision, code change, and feature mu
 | Testing | Vitest (unit/integration), Playwright (E2E) |
 | Lint + Format | Biome |
 | Deployment | Docker (docker-compose) |
-| Crypto (Node) | @noble/curves, @noble/hashes, Node crypto |
+| Crypto (Node) | Node.js `crypto` module only (X25519, Ed25519, AES-GCM, HKDF, HMAC — all built-in since Node 15+) |
 | Crypto (Browser) | WebCrypto API only (no JS library fallback) |
 
 ## Monorepo Structure

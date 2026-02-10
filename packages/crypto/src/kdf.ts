@@ -3,11 +3,11 @@
  *
  * HKDF-SHA256 (RFC 5869) — Derive KEK from ECDH shared secret.
  * HMAC-SHA256 (RFC 2104) — Approval tokens.
+ *
+ * Uses Node.js built-in crypto only.
  */
 
-import { hkdf } from '@noble/hashes/hkdf';
-import { hmac } from '@noble/hashes/hmac';
-import { sha256 } from '@noble/hashes/sha256';
+import { createHash, createHmac, hkdfSync } from 'node:crypto';
 
 /** Protocol version prefix for HKDF info parameter */
 const KEK_VERSION = 'clavum-kek-v1';
@@ -23,8 +23,9 @@ export const kdf = {
    * @param secretId - UUID of the secret (domain separation)
    */
   deriveKek(ikm: Uint8Array, salt: Uint8Array, secretId: string): Uint8Array {
-    const info = new TextEncoder().encode(`${KEK_VERSION}${secretId}`);
-    return hkdf(sha256, ikm, salt, info, 32);
+    const info = `${KEK_VERSION}${secretId}`;
+    const derived = hkdfSync('sha256', ikm, salt, info, 32);
+    return new Uint8Array(derived);
   },
 
   /**
@@ -34,22 +35,23 @@ export const kdf = {
    * → 4 bytes → mapped to 4 emoji (32 bits of security)
    */
   deriveFingerprint(sharedSecret: Uint8Array): Uint8Array {
-    const salt = new TextEncoder().encode('clavum-fingerprint');
-    const info = new TextEncoder().encode('verify');
-    return hkdf(sha256, sharedSecret, salt, info, 4);
+    const derived = hkdfSync('sha256', sharedSecret, 'clavum-fingerprint', 'verify', 4);
+    return new Uint8Array(derived);
   },
 
   /**
    * HMAC-SHA256 for approval tokens.
    */
   hmac(key: Uint8Array, message: Uint8Array): Uint8Array {
-    return hmac(sha256, key, message);
+    const mac = createHmac('sha256', key).update(message).digest();
+    return new Uint8Array(mac);
   },
 
   /**
    * SHA-256 hash.
    */
   hash(data: Uint8Array): Uint8Array {
-    return sha256(data);
+    const digest = createHash('sha256').update(data).digest();
+    return new Uint8Array(digest);
   },
 };
