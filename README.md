@@ -28,6 +28,12 @@ Every access request requires a reason. Every access is logged with cryptographi
 - **Server** — Standalone Node.js daemon. PostgreSQL + Prisma. Multi-tenant.
 - **Phone PWA** — Approvals, challenge signing, ECDH for red tier.
 
+## Documentation
+
+- **[docs/SPEC.md](docs/SPEC.md)** — Full cryptographic specification, flows, and architecture decisions
+- **[AGENT.md](AGENT.md)** — Development guidelines, testing strategy, coding standards
+- **[.specify/memory/constitution.md](.specify/memory/constitution.md)** — Project principles (Spec Kit)
+
 ## Status
 
 🚧 Early design phase. Not yet functional.

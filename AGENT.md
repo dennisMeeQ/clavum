@@ -167,7 +167,7 @@ All three must pass with zero errors.
 
 ## Documentation
 
-- **Spec**: `memory/clavum-spec.md` in the openclaw workspace (not in repo)
+- **Spec**: [`docs/SPEC.md`](docs/SPEC.md) — full cryptographic design, flows, architecture decisions
 - **README.md**: user-facing docs
 - **AGENT.md**: this file — development guidelines
 - **Code comments**: explain *why*, not *what*. Especially for crypto operations.
@@ -175,6 +175,6 @@ All three must pass with zero errors.
 
 ## Reference
 
-- Full cryptographic specification: see Clavum spec document
+- Full cryptographic specification: [`docs/SPEC.md`](docs/SPEC.md)
 - All variable names follow the glossary defined in the spec
-- When in doubt about crypto flows, refer to the spec — it is the source of truth
+- When in doubt about crypto flows, refer to `docs/SPEC.md` — it is the source of truth

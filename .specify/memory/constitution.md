@@ -12,7 +12,7 @@ Clavum is a security product. Every design decision, code change, and feature mu
 - Always use fresh random IVs for AES-GCM (12 bytes per encryption)
 - Always include AAD (`secret_id ‖ tier ‖ agent_id`) in AES-GCM operations
 - Always include reason in every access request and audit log entry
-- All crypto variable names must match the glossary in the spec (see Reference section)
+- All crypto variable names must match the glossary in [`docs/SPEC.md`](../../docs/SPEC.md)
 
 ### II. Test First
 - TDD mandatory: write tests → tests fail → implement → tests pass → refactor
@@ -157,7 +157,7 @@ All three must pass with zero errors.
 
 ## Governance
 - This constitution supersedes all other development practices
-- The cryptographic specification (clavum-spec.md) is the source of truth for all crypto flows and variable names
+- The cryptographic specification ([`docs/SPEC.md`](../../docs/SPEC.md)) is the source of truth for all crypto flows and variable names
 - Amendments require documentation and approval
 - Security-related changes require extra review
 
