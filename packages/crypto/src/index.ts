@@ -6,6 +6,7 @@
  */
 
 export { aes256gcm } from './aes.js';
+export { flows } from './flows.js';
 export { kdf } from './kdf.js';
 export { ed25519, x25519 } from './keys.js';
 export { signatures } from './signatures.js';

@@ -14,9 +14,9 @@ describe('signatures', () => {
 
       const sig = signatures.signRequest(keypair.privateKey, timestamp, method, path, body);
       expect(sig.length).toBe(64);
-      expect(
-        signatures.verifyRequest(keypair.publicKey, timestamp, method, path, body, sig),
-      ).toBe(true);
+      expect(signatures.verifyRequest(keypair.publicKey, timestamp, method, path, body, sig)).toBe(
+        true,
+      );
     });
 
     it('rejects expired timestamp', () => {
@@ -53,18 +53,16 @@ describe('signatures', () => {
       const ts = Date.now().toString();
       const body = new Uint8Array(0);
       const sig = signatures.signRequest(keypair.privateKey, ts, 'POST', '/api', body);
-      expect(
-        signatures.verifyRequest(keypair.publicKey, ts, 'GET', '/api', body, sig),
-      ).toBe(false);
+      expect(signatures.verifyRequest(keypair.publicKey, ts, 'GET', '/api', body, sig)).toBe(false);
     });
 
     it('rejects wrong path', () => {
       const ts = Date.now().toString();
       const body = new Uint8Array(0);
       const sig = signatures.signRequest(keypair.privateKey, ts, 'GET', '/api/a', body);
-      expect(
-        signatures.verifyRequest(keypair.publicKey, ts, 'GET', '/api/b', body, sig),
-      ).toBe(false);
+      expect(signatures.verifyRequest(keypair.publicKey, ts, 'GET', '/api/b', body, sig)).toBe(
+        false,
+      );
     });
   });
 
