@@ -85,7 +85,7 @@
   - Config get/set round-trip
   - Init is idempotent (running twice doesn't error)
 
-## Task 9: CLI `clavum pair` command
+## Task 9: CLI `clavum pair` command ✅
 **Files:** `packages/cli/src/commands/pair.ts` (new), update `src/index.ts`
 - Parse `clavum pair <server-url> --token <token>`
 - Generate X25519 + Ed25519 keypairs
