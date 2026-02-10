@@ -43,7 +43,7 @@
   - Missing fields → 400
   - Fingerprint matches local calculation
 
-## Task 5: Phone pairing API
+## Task 5: Phone pairing API ✅
 **Files:** `packages/server/src/routes/pair.ts` (continued)
 - `POST /api/pair/phone` — same flow as agent but registers Phone model
 - **Tests:** `tests/integration/pair-phone.test.ts`
