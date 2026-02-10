@@ -100,7 +100,7 @@
   - Server error → clean error message
   - Fingerprint displayed correctly
 
-## Task 10: PWA pairing screen (basic)
+## Task 10: PWA pairing screen (basic) ✅
 **Files:** `packages/pwa/src/routes/pair/+page.svelte` (new)
 - QR scanner (use `html5-qrcode` or similar)
 - Parse QR JSON
