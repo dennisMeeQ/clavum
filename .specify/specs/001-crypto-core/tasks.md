@@ -1,6 +1,6 @@
 # 001 — Crypto Core: Tasks
 
-## Task 1: Utility functions
+## Task 1: Utility functions ✅
 **File:** `packages/crypto/src/utils.ts` (new)
 - Implement `wipe(buffer)` — overwrite Uint8Array with zeros
 - Implement `concat(...arrays)` — concatenate Uint8Arrays
