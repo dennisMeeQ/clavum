@@ -2,7 +2,7 @@
 
 **Depends on:** 001 (crypto core), 002 (pairing — agent must be paired with server)
 
-## Task 1: Request auth middleware
+## Task 1: Request auth middleware ✅
 **Files:** `packages/server/src/middleware/auth.ts` (new)
 - Extract `X-Agent-Id`, `X-Timestamp`, `X-Signature` from request headers
 - Load agent's `ed25519_pub` from DB by agent_id
