@@ -27,7 +27,7 @@
   - Token is unique
   - QR payload contains valid pub + token + url
 
-## Task 4: Agent pairing API
+## Task 4: Agent pairing API ✅
 **Files:** `packages/server/src/routes/pair.ts` (continued)
 - `POST /api/pair/agent` — body: `{ token, x25519_pub, ed25519_pub, name }`
   - Validate token (exists, not expired, not used, type matches)
