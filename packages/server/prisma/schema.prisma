@@ -1,0 +1,84 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Tenant {
+  id             String    @id @default(uuid())
+  name           String
+  x25519Private  Bytes     @map("x25519_private")
+  x25519Public   Bytes     @map("x25519_public")
+  createdAt      DateTime  @default(now()) @map("created_at")
+
+  agents              Agent[]
+  phones              Phone[]
+  pairingInvitations  PairingInvitation[]
+  secrets             Secret[]
+
+  @@map("tenants")
+}
+
+model PairingInvitation {
+  id        String   @id @default(uuid())
+  tenantId  String   @map("tenant_id")
+  token     String   @unique
+  type      String   // "agent" | "phone"
+  expiresAt DateTime @map("expires_at")
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@map("pairing_invitations")
+}
+
+model Agent {
+  id            String   @id @default(uuid())
+  tenantId      String   @map("tenant_id")
+  name          String
+  x25519Public  Bytes    @map("x25519_public")
+  ed25519Public Bytes    @map("ed25519_public")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@map("agents")
+}
+
+model Phone {
+  id            String   @id @default(uuid())
+  tenantId      String   @map("tenant_id")
+  name          String   @default("Phone")
+  x25519Public  Bytes    @map("x25519_public")
+  ed25519Public Bytes    @map("ed25519_public")
+  createdAt     DateTime @default(now()) @map("created_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@map("phones")
+}
+
+model Secret {
+  id        String   @id @default(uuid())
+  tenantId  String   @map("tenant_id")
+  name      String
+  tier      String   // "green" | "yellow" | "red"
+  kekSalt   Bytes?   @map("kek_salt")
+  encDek    Bytes?   @map("enc_dek")
+  dekIv     Bytes?   @map("dek_iv")
+  dekTag    Bytes?   @map("dek_tag")
+  encBlob   Bytes?   @map("enc_blob")
+  blobIv    Bytes?   @map("blob_iv")
+  blobTag   Bytes?   @map("blob_tag")
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@unique([tenantId, name])
+  @@map("secrets")
+}

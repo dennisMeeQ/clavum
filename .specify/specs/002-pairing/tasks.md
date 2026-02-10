@@ -50,7 +50,7 @@
   - Same test cases as agent pairing
   - Phone registered with correct public keys
 
-## Task 6: Emoji fingerprint mapping
+## Task 6: Emoji fingerprint mapping ✅
 **Files:** `packages/crypto/src/emoji.ts` (new)
 - Define array of 256 emoji (curated set, consistent cross-platform rendering)
 - `fingerprintToEmoji(bytes: Uint8Array)` → string (4 emoji)
@@ -60,7 +60,7 @@
   - Deterministic (same input → same emoji)
   - All 256 entries are unique
 
-## Task 7: CLI keystore
+## Task 7: CLI keystore ✅
 **Files:** `packages/cli/src/keystore.ts` (new)
 - `store(name, key)` — try OS Keychain, fallback to file
 - `load(name)` → Uint8Array or null
@@ -74,7 +74,7 @@
   - Exists returns true/false correctly
   - Note: Keychain tests may need mocking
 
-## Task 8: CLI vault initialization
+## Task 8: CLI vault initialization ✅
 **Files:** `packages/cli/src/vault.ts` (new)
 - `initVault(dbPath)` — create SQLite DB + tables (secrets + config)
 - `getConfig(key)` / `setConfig(key, value)` — read/write config table

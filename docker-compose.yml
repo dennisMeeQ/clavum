@@ -1,0 +1,15 @@
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: clavum-postgres
+    environment:
+      POSTGRES_USER: clavum
+      POSTGRES_PASSWORD: clavum_dev
+      POSTGRES_DB: clavum
+    ports:
+      - "5434:5432"
+    volumes:
+      - clavum-pgdata:/var/lib/postgresql/data
+
+volumes:
+  clavum-pgdata:
