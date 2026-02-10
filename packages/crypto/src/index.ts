@@ -6,6 +6,7 @@
  */
 
 export { aes256gcm } from './aes.js';
+export { EMOJI_TABLE, fingerprintToEmoji } from './emoji.js';
 export { flows } from './flows.js';
 export { kdf } from './kdf.js';
 export { ed25519, x25519 } from './keys.js';

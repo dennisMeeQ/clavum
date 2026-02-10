@@ -8,7 +8,7 @@
 - Implement `toBase64Url(bytes)` / `fromBase64Url(str)`
 - **Tests:** `tests/unit/utils.test.ts` — all functions, edge cases (empty arrays, different lengths)
 
-## Task 2: Key generation and ECDH (X25519)
+## Task 2: Key generation and ECDH (X25519) ✅
 **File:** `packages/crypto/src/keys.ts` (refine existing)
 - Verify `x25519.generateKeypair()` produces valid 32-byte raw keys
 - Verify `x25519.sharedSecret()` produces correct ECDH output
@@ -18,7 +18,7 @@
   - Different keypairs → different secrets
   - RFC 7748 test vectors (Section 6.1)
 
-## Task 3: Digital signatures (Ed25519)
+## Task 3: Digital signatures (Ed25519) ✅
 **File:** `packages/crypto/src/keys.ts` (refine existing)
 - Verify `ed25519.generateKeypair()` produces valid 32-byte raw keys
 - Verify `ed25519.sign()` and `ed25519.verify()` work correctly
@@ -30,7 +30,7 @@
   - Verify rejects tampered signature
   - RFC 8032 test vectors (Section 7.1)
 
-## Task 4: AES-256-GCM
+## Task 4: AES-256-GCM ✅
 **File:** `packages/crypto/src/aes.ts` (refine existing)
 - Verify encrypt/decrypt round-trip
 - Verify AAD binding
@@ -42,7 +42,7 @@
   - Decrypt fails: wrong AAD
   - Decrypt fails: wrong/missing tag
 
-## Task 5: HKDF and hashing
+## Task 5: HKDF and hashing ✅
 **File:** `packages/crypto/src/kdf.ts` (refine existing)
 - Verify `deriveKek()` produces deterministic 32-byte KEK
 - Verify `deriveFingerprint()` produces 4 bytes
@@ -55,7 +55,7 @@
   - hmac: 32 bytes, deterministic
   - hash: known SHA-256 test vector
 
-## Task 6: Request signing and challenge construction
+## Task 6: Request signing and challenge construction ✅
 **File:** `packages/crypto/src/signatures.ts` (refine existing)
 - Verify request signing/verification with replay window
 - Verify context-bound challenge construction
@@ -68,7 +68,7 @@
   - signApproval/verifyApproval round-trip
   - verifyApproval rejects wrong challenge
 
-## Task 7: Composite flows (KEK derivation)
+## Task 7: Composite flows (KEK derivation) ✅
 **File:** `packages/crypto/src/flows.ts` (new)
 - Implement `deriveGreenKek(ephPriv, serverPub, kekSalt, secretId)` → KEK
 - Implement `deriveRedKek(kAgent, kPhone, challenge, secretId)` → KEK (takes pre-derived shared secrets)
@@ -84,7 +84,7 @@
   - encryptSecret/decryptSecret round-trip
   - decryptSecret fails with wrong DEK
 
-## Task 8: Update exports and verify coverage
+## Task 8: Update exports and verify coverage ✅
 **File:** `packages/crypto/src/index.ts` (update)
 - Export all modules: keys, aes, kdf, signatures, flows, utils
 - Run `pnpm --filter @clavum/crypto test -- --coverage`
