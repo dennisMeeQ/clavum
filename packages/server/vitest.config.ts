@@ -5,5 +5,6 @@ export default defineConfig({
     env: {
       DATABASE_URL: 'postgresql://clavum:clavum_dev@localhost:5434/clavum',
     },
+    fileParallelism: false,
   },
 });

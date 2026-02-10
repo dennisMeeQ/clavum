@@ -17,7 +17,7 @@
   - Get tenant → returns public key
   - Public key is valid 32-byte X25519 key
 
-## Task 3: Pairing invitation API
+## Task 3: Pairing invitation API ✅
 **Files:** `packages/server/src/routes/pair.ts` (new)
 - `POST /api/pair/invite` — create invitation: random token, 10-min expiry, return QR JSON payload
 - Token: `crypto.randomBytes(32).toString('base64url')`
