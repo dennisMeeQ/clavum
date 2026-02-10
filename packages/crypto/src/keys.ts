@@ -5,8 +5,7 @@
  * Ed25519 — Digital signatures (RFC 8032)
  */
 
-import { x25519 as x25519curve } from '@noble/curves/ed25519';
-import { ed25519 as ed25519curve } from '@noble/curves/ed25519';
+import { ed25519 as ed25519curve, x25519 as x25519curve } from '@noble/curves/ed25519';
 
 export const x25519 = {
   /** Generate a new X25519 keypair */

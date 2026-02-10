@@ -2,8 +2,8 @@
  * Request signing and approval verification.
  */
 
-import { ed25519 } from './keys.js';
 import { kdf } from './kdf.js';
+import { ed25519 } from './keys.js';
 
 const encoder = new TextEncoder();
 
@@ -43,7 +43,7 @@ export const signatures = {
     // Check replay window
     const requestTime = parseInt(timestamp, 10);
     const now = Date.now();
-    if (isNaN(requestTime) || Math.abs(now - requestTime) > maxAgeMs) {
+    if (Number.isNaN(requestTime) || Math.abs(now - requestTime) > maxAgeMs) {
       return false;
     }
 
@@ -81,11 +81,7 @@ export const signatures = {
   /**
    * Verify an approval signature (server side).
    */
-  verifyApproval(
-    publicKey: Uint8Array,
-    challenge: Uint8Array,
-    signature: Uint8Array,
-  ): boolean {
+  verifyApproval(publicKey: Uint8Array, challenge: Uint8Array, signature: Uint8Array): boolean {
     return ed25519.verify(publicKey, challenge, signature);
   },
 };

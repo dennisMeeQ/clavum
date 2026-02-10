@@ -6,5 +6,16 @@
   "license": "AGPL-3.0-only",
   "engines": {
     "node": ">=22"
+  },
+  "scripts": {
+    "check": "biome check .",
+    "check:fix": "biome check --write .",
+    "typecheck": "pnpm --recursive exec tsc --noEmit",
+    "test": "pnpm --recursive test",
+    "test:coverage": "pnpm --recursive test -- --coverage",
+    "validate": "pnpm check && pnpm typecheck && pnpm test"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.14"
   }
 }

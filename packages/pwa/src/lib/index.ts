@@ -1,0 +1,2 @@
+// @clavum/pwa — placeholder
+export {};
