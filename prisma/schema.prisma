@@ -15,14 +15,31 @@ model Tenant {
   createdAt DateTime @default(now()) @map("created_at")
 
   // Per-tenant server X25519 keypair (OD-2)
-  serverX25519Priv Bytes @map("server_x25519_priv")
-  serverX25519Pub  Bytes @map("server_x25519_pub")
+  x25519Private Bytes @map("server_x25519_priv")
+  x25519Public  Bytes @map("server_x25519_pub")
 
-  agents  Agent[]
-  phones  Phone[]
-  secrets SecretMetadata[]
+  agents      Agent[]
+  phones      Phone[]
+  secrets     SecretMetadata[]
+  invitations PairingInvitation[]
 
   @@map("tenants")
+}
+
+// --- Pairing Invitations ---
+
+model PairingInvitation {
+  id        String   @id @default(uuid())
+  tenantId  String   @map("tenant_id")
+  token     String   @unique
+  type      String   // "agent" or "phone"
+  expiresAt DateTime @map("expires_at")
+  used      Boolean  @default(false)
+  createdAt DateTime @default(now()) @map("created_at")
+
+  tenant Tenant @relation(fields: [tenantId], references: [id])
+
+  @@map("pairing_invitations")
 }
 
 // --- Paired Agents ---
@@ -33,8 +50,8 @@ model Agent {
   name     String // e.g. "pepe"
 
   // Agent's public keys (registered at pairing)
-  x25519Pub  Bytes @map("x25519_pub")
-  ed25519Pub Bytes @map("ed25519_pub")
+  x25519Public  Bytes @map("x25519_pub")
+  ed25519Public Bytes @map("ed25519_pub")
 
   // Key pinning (OD-4a mitigation)
   allowedIps    String[] @map("allowed_ips")
@@ -58,8 +75,8 @@ model Phone {
   name     String // e.g. "Dennis iPhone"
 
   // Phone's public keys (registered at pairing)
-  x25519Pub  Bytes @map("x25519_pub")
-  ed25519Pub Bytes @map("ed25519_pub")
+  x25519Public  Bytes @map("x25519_pub")
+  ed25519Public Bytes @map("ed25519_pub")
 
   // Push notification endpoint
   pushEndpoint String? @map("push_endpoint")

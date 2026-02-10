@@ -7,7 +7,7 @@ beforeAll(async () => {
   await prisma.pairingInvitation.deleteMany();
   await prisma.agent.deleteMany();
   await prisma.phone.deleteMany();
-  await prisma.secret.deleteMany();
+  await prisma.secretMetadata.deleteMany();
   await prisma.tenant.deleteMany();
 });
 

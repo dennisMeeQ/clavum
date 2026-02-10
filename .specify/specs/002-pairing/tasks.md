@@ -8,7 +8,7 @@
 - Run `prisma migrate dev` to create migration
 - **Tests:** Schema compiles, migration applies cleanly
 
-## Task 2: Tenant management API
+## Task 2: Tenant management API ✅
 **Files:** `packages/server/src/routes/tenants.ts` (new)
 - `POST /api/tenants` — create tenant with name, generate server X25519 keypair, store in DB
 - `GET /api/tenants/:id` — return tenant info (public key, not private)

@@ -7,10 +7,17 @@ settings:
 importers:
 
   .:
+    dependencies:
+      '@prisma/client':
+        specifier: 6.19.2
+        version: 6.19.2(prisma@6.19.2(typescript@5.9.3))(typescript@5.9.3)
     devDependencies:
       '@biomejs/biome':
         specifier: ^2.3.14
         version: 2.3.14
+      prisma:
+        specifier: 6.19.2
+        version: 6.19.2(typescript@5.9.3)
 
   packages/cli:
     dependencies:
