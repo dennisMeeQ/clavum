@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { approvals } from './routes/approvals.js';
 import { audit } from './routes/audit.js';
 import { pair } from './routes/pair.js';
 import { secrets } from './routes/secrets.js';
@@ -13,3 +14,4 @@ app.route('/api/tenants', tenants);
 app.route('/api/pair', pair);
 app.route('/api/secrets', secrets);
 app.route('/api/audit', audit);
+app.route('/api/approvals', approvals);
