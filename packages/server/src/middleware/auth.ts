@@ -10,6 +10,7 @@ import { signatures } from '@clavum/crypto';
 import type { Agent } from '@prisma/client';
 import type { Context, Next } from 'hono';
 import { prisma } from '../db.js';
+import { isReplay, storeNonce } from '../services/nonce.js';
 
 declare module 'hono' {
   interface ContextVariableMap {
@@ -57,21 +58,13 @@ export async function authMiddleware(c: Context, next: Next): Promise<Response |
 
   // Nonce dedup: hash signature to check for replay
   const sigHash = createHash('sha256').update(sig).digest('hex');
-  const existing = await prisma.usedNonce.findUnique({
-    where: { nonce: sigHash },
-  });
 
-  if (existing) {
+  if (await isReplay(sigHash)) {
     return c.json({ error: 'replayed request' }, 409);
   }
 
   // Store nonce with 120s expiry (2x the window for safety)
-  await prisma.usedNonce.create({
-    data: {
-      nonce: sigHash,
-      expiresAt: new Date(Date.now() + 120_000),
-    },
-  });
+  await storeNonce(sigHash, new Date(Date.now() + 120_000));
 
   // Set agent on context
   c.set('agent', agent);

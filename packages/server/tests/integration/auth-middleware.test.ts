@@ -27,11 +27,13 @@ function signRequest(method: string, path: string, body: string, timestampOverri
 }
 
 beforeAll(async () => {
+  await prisma.auditLog.deleteMany();
+  await prisma.approvalRequest.deleteMany();
+  await prisma.secretMetadata.deleteMany();
   await prisma.usedNonce.deleteMany();
   await prisma.pairingInvitation.deleteMany();
   await prisma.agent.deleteMany();
   await prisma.phone.deleteMany();
-  await prisma.secretMetadata.deleteMany();
   await prisma.tenant.deleteMany();
 
   // Create tenant + agent

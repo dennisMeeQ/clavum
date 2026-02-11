@@ -5,11 +5,14 @@ import { prisma } from '../../src/db.js';
 let tenantId: string;
 
 beforeAll(async () => {
-  // Clean test data
+  // Clean test data (respect FK order)
+  await prisma.auditLog.deleteMany();
+  await prisma.approvalRequest.deleteMany();
+  await prisma.secretMetadata.deleteMany();
+  await prisma.usedNonce.deleteMany();
   await prisma.pairingInvitation.deleteMany();
   await prisma.agent.deleteMany();
   await prisma.phone.deleteMany();
-  await prisma.secretMetadata.deleteMany();
   await prisma.tenant.deleteMany();
 
   // Create a tenant for testing

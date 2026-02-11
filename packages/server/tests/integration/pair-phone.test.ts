@@ -16,10 +16,13 @@ async function createInvitation(type = 'phone') {
 }
 
 beforeAll(async () => {
+  await prisma.auditLog.deleteMany();
+  await prisma.approvalRequest.deleteMany();
+  await prisma.secretMetadata.deleteMany();
+  await prisma.usedNonce.deleteMany();
   await prisma.pairingInvitation.deleteMany();
   await prisma.agent.deleteMany();
   await prisma.phone.deleteMany();
-  await prisma.secretMetadata.deleteMany();
   await prisma.tenant.deleteMany();
 
   const res = await app.request('/api/tenants', {
