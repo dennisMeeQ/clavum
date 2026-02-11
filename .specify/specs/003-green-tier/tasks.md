@@ -82,7 +82,7 @@
   - Filterable by date range
   - Agent A can't see Agent B's audit entries
 
-## Task 7: CLI signed HTTP client
+## Task 7: CLI signed HTTP client ✅
 **Files:** `packages/cli/src/http.ts` (new)
 - `signedFetch(method, path, body, config)` — wraps fetch with auth headers
   - Loads agent_ed25519_priv from keystore
