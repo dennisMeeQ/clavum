@@ -124,7 +124,7 @@
   - Missing name → error
   - Missing tier → error
 
-## Task 10: CLI DEK cache
+## Task 10: CLI DEK cache ✅
 **Files:** `packages/cli/src/cache.ts` (new)
 - In-memory Map: `secret_id → { dek: Uint8Array, expiresAt: number }`
 - `get(secretId)` → DEK or null (checks expiry, wipes if expired)

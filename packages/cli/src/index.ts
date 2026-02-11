@@ -11,6 +11,7 @@
  *   clavum pair <server-url>            Pair with a server
  */
 
+import { get } from './commands/get.js';
 import { pair } from './commands/pair.js';
 import { store } from './commands/store.js';
 
@@ -37,7 +38,22 @@ async function main() {
       await pair({ serverUrl, token, name: getFlag('name') });
       break;
     }
-    case 'get':
+    case 'get': {
+      const getName = args[1];
+      const getReason = getFlag('reason');
+
+      if (!getName || !getReason) {
+        console.error('Usage: clavum get <name> --reason "..."');
+        process.exit(1);
+      }
+
+      await get({
+        name: getName,
+        reason: getReason,
+        json: args.includes('--json'),
+      });
+      break;
+    }
     case 'store': {
       const storeName = args[1];
       const storeTier = getFlag('tier');
