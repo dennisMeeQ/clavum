@@ -108,7 +108,7 @@
   - Get nonexistent → null
   - Duplicate name → error
 
-## Task 9: CLI `clavum store` command
+## Task 9: CLI `clavum store` command ✅
 **Files:** `packages/cli/src/commands/store.ts` (new), update `src/index.ts`
 - Parse: `clavum store <name> --tier green [--value <val>]`
 - Read secret from stdin (or --value)
