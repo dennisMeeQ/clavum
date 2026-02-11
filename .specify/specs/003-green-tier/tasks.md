@@ -72,7 +72,7 @@
   - Missing reason → 400
   - Audit log written with correct fields
 
-## Task 6: Audit query API
+## Task 6: Audit query API ✅
 **Files:** `packages/server/src/routes/audit.ts` (new)
 - `GET /api/audit` — query params: secret_id, from, to, limit (default 50)
 - Auth required. Returns audit entries for authenticated agent's secrets only.
