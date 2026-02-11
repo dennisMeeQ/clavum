@@ -55,6 +55,8 @@ describe('DEK cache', () => {
 
     expect(cached1).not.toBeNull();
     expect(cached2).not.toBeNull();
-    expect(Buffer.from(cached1!).toString('hex')).not.toBe(Buffer.from(cached2!).toString('hex'));
+    expect(Buffer.from(cached1 ?? new Uint8Array()).toString('hex')).not.toBe(
+      Buffer.from(cached2 ?? new Uint8Array()).toString('hex'),
+    );
   });
 });

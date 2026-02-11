@@ -1,8 +1,8 @@
 import { existsSync, mkdirSync, rmSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { ed25519, fingerprintToEmoji, kdf, toBase64Url, x25519 } from '@clavum/crypto';
-import { afterAll, afterEach, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+import { fingerprintToEmoji, kdf, toBase64Url, x25519 } from '@clavum/crypto';
+import { afterAll, beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
 
 // Mock the homedir so we don't touch real ~/.clavum
 const testDir = join(tmpdir(), `clavum-test-${Date.now()}`);

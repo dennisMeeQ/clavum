@@ -6,7 +6,7 @@ import { authMiddleware } from '../../src/middleware/auth.js';
 
 let agentId: string;
 let agentEd25519Priv: Uint8Array;
-let agentEd25519Pub: Uint8Array;
+let _agentEd25519Pub: Uint8Array;
 
 // Create a test app with auth middleware
 const testApp = new Hono();
@@ -49,7 +49,7 @@ beforeAll(async () => {
   const agentX25519Keys = x25519.generateKeypair();
   const agentEdKeys = ed25519.generateKeypair();
   agentEd25519Priv = agentEdKeys.privateKey;
-  agentEd25519Pub = agentEdKeys.publicKey;
+  _agentEd25519Pub = agentEdKeys.publicKey;
 
   const agent = await prisma.agent.create({
     data: {

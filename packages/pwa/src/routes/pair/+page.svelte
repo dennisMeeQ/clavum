@@ -10,15 +10,15 @@ import {
 
 type PairingState = 'scan' | 'pairing' | 'paired' | 'error';
 
-let state: PairingState = $state('scan');
+let pairState: PairingState = $state('scan');
 let error: string = $state('');
 let fingerprint: string = $state('');
 let phoneId: string = $state('');
-const qrInput: string = $state('');
+let qrInput: string = $state('');
 
 async function handlePair(qrData: string) {
   try {
-    state = 'pairing';
+    pairState = 'pairing';
     const qr: QrPayload = parseQrPayload(qrData);
 
     // Generate keypairs
@@ -64,10 +64,10 @@ async function handlePair(qrData: string) {
 
     fingerprint = data.fingerprint;
     phoneId = data.phoneId;
-    state = 'paired';
+    pairState = 'paired';
   } catch (e) {
     error = e instanceof Error ? e.message : 'Unknown error';
-    state = 'error';
+    pairState = 'error';
   }
 }
 
@@ -79,7 +79,7 @@ function handleManualPair() {
 </script>
 
 <div class="pair-container">
-	{#if state === 'scan'}
+	{#if pairState === 'scan'}
 		<h1>🔗 Pair with Server</h1>
 		<p>Scan the QR code from your server, or paste the pairing data below.</p>
 
@@ -92,15 +92,15 @@ function handleManualPair() {
 			<h3>Manual Entry</h3>
 			<textarea
 				bind:value={qrInput}
-				placeholder='Paste QR JSON: {"pub":"...","token":"...","url":"..."}'
+				placeholder={'Paste QR JSON: {"pub":"...","token":"...","url":"..."}'}
 				rows="4"
 			></textarea>
 			<button onclick={handleManualPair}>Pair</button>
 		</div>
-	{:else if state === 'pairing'}
+	{:else if pairState === 'pairing'}
 		<h1>⏳ Pairing...</h1>
 		<p>Generating keys and registering with server...</p>
-	{:else if state === 'paired'}
+	{:else if pairState === 'paired'}
 		<h1>✅ Paired!</h1>
 		<p class="fingerprint">{fingerprint}</p>
 		<p class="fingerprint-hint">
@@ -108,10 +108,10 @@ function handleManualPair() {
 		</p>
 		<p class="phone-id">Phone ID: {phoneId}</p>
 		<a href="/">← Back to Home</a>
-	{:else if state === 'error'}
+	{:else if pairState === 'error'}
 		<h1>❌ Pairing Failed</h1>
 		<p class="error">{error}</p>
-		<button onclick={() => { state = 'scan'; error = ''; }}>Try Again</button>
+		<button onclick={() => { pairState = 'scan'; error = ''; }}>Try Again</button>
 	{/if}
 </div>
 

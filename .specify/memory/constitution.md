@@ -136,12 +136,18 @@ packages/<pkg>/
 Before any PR is considered ready:
 
 ```bash
-pnpm check          # Biome lint + format
+pnpm check          # Biome lint + format (--error-on-warnings: 0 warnings allowed)
 pnpm typecheck      # tsc --noEmit all packages
+pnpm --filter @clavum/pwa check  # svelte-check for PWA package
 pnpm test           # all tests pass
+# Or simply:
+pnpm validate       # runs all of the above in sequence
 ```
 
-All three must pass with zero errors.
+**Requirements:**
+- **Biome check** must return 0 warnings (enforced as errors via `--error-on-warnings`)
+- **svelte-check** must pass for the PWA package
+- All validation must be green before committing
 
 ## Git Workflow
 - Main branch: `main` — always deployable

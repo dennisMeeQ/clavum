@@ -72,12 +72,12 @@ describe('audit service', () => {
 
     const entry = await prisma.auditLog.findUnique({ where: { id } });
     expect(entry).not.toBeNull();
-    expect(entry!.agentId).toBe(agentId);
-    expect(entry!.secretId).toBe(secretId);
-    expect(entry!.reason).toBe('CI deployment needs DB password');
-    expect(entry!.tier).toBe('green');
-    expect(entry!.result).toBe('auto_granted');
-    expect(entry!.latencyMs).toBe(42);
+    expect(entry?.agentId).toBe(agentId);
+    expect(entry?.secretId).toBe(secretId);
+    expect(entry?.reason).toBe('CI deployment needs DB password');
+    expect(entry?.tier).toBe('green');
+    expect(entry?.result).toBe('auto_granted');
+    expect(entry?.latencyMs).toBe(42);
   });
 
   it('should query entries by agent', async () => {

@@ -41,6 +41,9 @@
         "rules": {
           "correctness": {
             "noUnusedVariables": "off"
+          },
+          "style": {
+            "useConst": "off"
           }
         }
       }

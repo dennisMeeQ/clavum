@@ -131,12 +131,19 @@ pnpm test:coverage     # with coverage report
 Before any PR is considered ready:
 
 ```bash
-pnpm biome check .           # lint + format
-pnpm --recursive exec tsc --noEmit  # type check all packages
+pnpm check                   # biome check --error-on-warnings (lint + format, 0 warnings allowed)
+pnpm typecheck               # tsc --noEmit across all packages
+pnpm --filter @clavum/pwa check  # svelte-check for the PWA package
+pnpm build                   # build shared packages
 pnpm test                    # all tests
+# Or simply:
+pnpm validate                # runs all of the above in sequence
 ```
 
-All three must pass with zero errors.
+**Requirements:**
+- **Biome check** must return 0 warnings (enforced as errors via `--error-on-warnings`)
+- **svelte-check** must pass for the PWA package
+- All validation must be green before committing
 
 ## Crypto-Specific Guidelines
 

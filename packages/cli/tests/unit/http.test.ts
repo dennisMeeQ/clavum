@@ -14,7 +14,7 @@ import {
 let serverPort: number;
 let server: ReturnType<typeof createServer>;
 let lastHeaders: Record<string, string | string[] | undefined> = {};
-let lastBody = '';
+let _lastBody = '';
 let responseStatus = 200;
 let responseBody = '{}';
 
@@ -33,7 +33,7 @@ beforeAll(async () => {
       body += chunk.toString();
     });
     req.on('end', () => {
-      lastBody = body;
+      _lastBody = body;
       res.writeHead(responseStatus, { 'Content-Type': 'application/json' });
       res.end(responseBody);
     });

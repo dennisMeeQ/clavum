@@ -18,7 +18,7 @@ let serverPub: Uint8Array;
 let agentId: string;
 let agentEdPriv: Uint8Array;
 let agentX25519Priv: Uint8Array;
-let agentX25519Pub: Uint8Array;
+let _agentX25519Pub: Uint8Array;
 let agentBId: string;
 let agentBEdPriv: Uint8Array;
 
@@ -66,7 +66,7 @@ beforeAll(async () => {
   // Agent A (main test agent)
   const aX = x25519.generateKeypair();
   agentX25519Priv = aX.privateKey;
-  agentX25519Pub = aX.publicKey;
+  _agentX25519Pub = aX.publicKey;
   const aEd = ed25519.generateKeypair();
   agentEdPriv = aEd.privateKey;
   const agentA = await prisma.agent.create({

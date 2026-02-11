@@ -11,17 +11,17 @@ import { getSecret, initVault, insertSecret, setConfig } from '../../src/vault.j
 // Server keys for the test
 const serverKeys = x25519.generateKeypair();
 const agentX25519 = x25519.generateKeypair();
-const agentEd25519 = ed25519.generateKeypair();
+const _agentEd25519 = ed25519.generateKeypair();
 
 // Compute K_session for mocking server response
 const kSession = x25519.sharedSecret(serverKeys.privateKey, agentX25519.publicKey);
 
-let mockRetrieveCalled = false;
+let _mockRetrieveCalled = false;
 let mockRetrieveKek: Uint8Array | null = null;
 
 vi.mock('../../src/http.js', () => ({
   signedFetch: vi.fn(async () => {
-    mockRetrieveCalled = true;
+    _mockRetrieveCalled = true;
     if (!mockRetrieveKek) throw new Error('No KEK set for mock');
 
     // Encrypt KEK with K_session like the server would
@@ -47,7 +47,7 @@ beforeEach(() => {
   setConfig(db, 'server_url', 'http://localhost:3000');
   setConfig(db, 'server_x25519_pub', toBase64Url(serverKeys.publicKey));
   setConfig(db, 'agent_id', 'test-agent-id');
-  mockRetrieveCalled = false;
+  _mockRetrieveCalled = false;
   mockRetrieveKek = null;
   dekCache.clear();
 });

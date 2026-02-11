@@ -1,14 +1,14 @@
-import { randomBytes, randomUUID } from 'node:crypto';
-import { ed25519, signatures, toBase64Url, x25519 } from '@clavum/crypto';
+import { randomUUID } from 'node:crypto';
+import { ed25519, signatures, x25519 } from '@clavum/crypto';
 import { afterAll, beforeAll, beforeEach, describe, expect, it } from 'vitest';
 import { app } from '../../src/app.js';
 import { prisma } from '../../src/db.js';
 
-let tenantId: string;
+let _tenantId: string;
 let agentAId: string;
 let agentAEdPriv: Uint8Array;
 let agentBId: string;
-let agentBEdPriv: Uint8Array;
+let _agentBEdPriv: Uint8Array;
 let secretAId: string;
 let secretBId: string;
 
@@ -48,7 +48,7 @@ beforeAll(async () => {
       x25519Public: Buffer.from(sKeys.publicKey),
     },
   });
-  tenantId = tenant.id;
+  _tenantId = tenant.id;
 
   // Agent A
   const aX = x25519.generateKeypair();
@@ -67,7 +67,7 @@ beforeAll(async () => {
   // Agent B
   const bX = x25519.generateKeypair();
   const bEd = ed25519.generateKeypair();
-  agentBEdPriv = bEd.privateKey;
+  _agentBEdPriv = bEd.privateKey;
   const agentB = await prisma.agent.create({
     data: {
       tenantId: tenant.id,

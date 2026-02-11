@@ -9,7 +9,7 @@
 import { randomBytes, randomUUID } from 'node:crypto';
 import { homedir } from 'node:os';
 import { join } from 'node:path';
-import { flows, fromBase64Url, toBase64Url, wipe, x25519 } from '@clavum/crypto';
+import { flows, fromBase64Url, wipe, x25519 } from '@clavum/crypto';
 import type { SignedFetchConfig } from '../http.js';
 import { signedFetch } from '../http.js';
 import { keystore } from '../keystore.js';
@@ -74,7 +74,11 @@ export async function store(options: StoreOptions): Promise<void> {
 
   // Generate DEK and encrypt plaintext
   const dek = new Uint8Array(randomBytes(32));
-  const { encryptedBlob, blobIv, blobTag } = flows.encryptSecret(dek, plaintextBytes, aad);
+  const {
+    encryptedBlob: _encryptedBlob,
+    blobIv: _blobIv,
+    blobTag: _blobTag,
+  } = flows.encryptSecret(dek, plaintextBytes, aad);
 
   // Generate ephemeral keypair and kek_salt for green KEK derivation
   const eph = x25519.generateKeypair();

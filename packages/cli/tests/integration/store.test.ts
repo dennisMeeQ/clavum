@@ -9,7 +9,7 @@ import { keystore } from '../../src/keystore.js';
 import { getSecret, initVault, setConfig } from '../../src/vault.js';
 
 // Mock HTTP to capture server calls
-const lastFetchUrl = '';
+const _lastFetchUrl = '';
 let lastFetchBody = '';
 
 vi.mock('../../src/http.js', () => ({
@@ -56,10 +56,10 @@ afterEach(() => {
 describe('clavum store', () => {
   it('should store a secret in local vault', async () => {
     // We need to dynamically import store to use the mocked http
-    const { store } = await import('../../src/commands/store.js');
+    const { store: _store } = await import('../../src/commands/store.js');
 
     // Monkey-patch the vault path
-    const origHomedir = process.env.HOME;
+    const _origHomedir = process.env.HOME;
     // Instead, we'll test the vault functions directly since the command uses homedir
     // For a proper test we'd need to make dbPath configurable
 

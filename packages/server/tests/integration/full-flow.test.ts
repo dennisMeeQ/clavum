@@ -10,7 +10,6 @@ import {
   ed25519,
   flows,
   fromBase64Url,
-  kdf,
   signatures,
   toBase64Url,
   x25519,
@@ -26,7 +25,7 @@ let serverPub: Uint8Array;
 // Agent-side keys
 let agentId: string;
 let agentX25519Priv: Uint8Array;
-let agentX25519Pub: Uint8Array;
+let _agentX25519Pub: Uint8Array;
 let agentEdPriv: Uint8Array;
 
 function signedHeaders(method: string, path: string, body: string) {
@@ -84,7 +83,7 @@ describe('full green-tier flow', () => {
     // Step 3: Pair agent
     const aX = x25519.generateKeypair();
     agentX25519Priv = aX.privateKey;
-    agentX25519Pub = aX.publicKey;
+    _agentX25519Pub = aX.publicKey;
     const aEd = ed25519.generateKeypair();
     agentEdPriv = aEd.privateKey;
 
