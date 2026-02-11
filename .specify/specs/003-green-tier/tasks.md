@@ -165,7 +165,7 @@
   - Delete → removed from vault + server (mocked)
   - Delete nonexistent → error
 
-## Task 13: Mount routes and final integration
+## Task 13: Mount routes and final integration ✅
 **Files:** `packages/server/src/app.ts` (update)
 - Mount auth middleware on `/api/*` (except pairing routes)
 - Mount secrets routes
