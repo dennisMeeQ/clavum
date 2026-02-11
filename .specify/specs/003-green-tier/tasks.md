@@ -94,7 +94,7 @@
   - Signature is valid (verify with public key)
   - Error classes thrown for 401, 404, 409, 500
 
-## Task 8: CLI vault CRUD operations
+## Task 8: CLI vault CRUD operations ✅
 **Files:** `packages/cli/src/vault.ts` (extend from 002)
 - `insertSecret(record)` — insert vault record into SQLite
 - `getSecret(name)` → vault record or null

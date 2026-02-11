@@ -12,6 +12,7 @@
  */
 
 import { pair } from './commands/pair.js';
+import { store } from './commands/store.js';
 
 const args = process.argv.slice(2);
 const command = args[0];
@@ -37,7 +38,23 @@ async function main() {
       break;
     }
     case 'get':
-    case 'store':
+    case 'store': {
+      const storeName = args[1];
+      const storeTier = getFlag('tier');
+
+      if (!storeName || !storeTier) {
+        console.error('Usage: clavum store <name> --tier green [--value <val>]');
+        process.exit(1);
+      }
+
+      await store({
+        name: storeName,
+        tier: storeTier,
+        value: getFlag('value'),
+        json: args.includes('--json'),
+      });
+      break;
+    }
     case 'list':
     case 'audit':
       console.error(`TODO: ${command} not yet implemented`);
