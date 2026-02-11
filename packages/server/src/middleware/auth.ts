@@ -22,7 +22,7 @@ declare module 'hono' {
  * Auth middleware for Hono.
  * Requires X-Agent-Id, X-Timestamp, X-Signature headers.
  */
-export async function authMiddleware(c: Context, next: Next): Promise<Response | void> {
+export async function authMiddleware(c: Context, next: Next): Promise<Response | undefined> {
   const agentId = c.req.header('x-agent-id');
   const timestamp = c.req.header('x-timestamp');
   const signatureB64 = c.req.header('x-signature');

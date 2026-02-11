@@ -19,7 +19,7 @@
   - Unknown agent_id → 401 (not 404, avoid enumeration)
   - Replayed nonce → 409
 
-## Task 2: Nonce cleanup
+## Task 2: Nonce cleanup ✅
 **Files:** `packages/server/src/services/nonce.ts` (new)
 - `storeNonce(signatureHash, expiresAt)` — insert into UsedNonce table
 - `isReplay(signatureHash)` → boolean
@@ -30,7 +30,7 @@
   - Check unknown → not replay
   - Expired nonce → cleaned up, no longer detected as replay
 
-## Task 3: Audit logging service
+## Task 3: Audit logging service ✅
 **Files:** `packages/server/src/services/audit.ts` (new)
 - `createEntry({ agentId, secretId, reason, tier, result, latencyMs, proof? })`
 - Writes to AuditLog table
