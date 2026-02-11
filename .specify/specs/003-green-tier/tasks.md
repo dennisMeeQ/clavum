@@ -137,7 +137,7 @@
   - Clear wipes all
   - Different secrets cached independently
 
-## Task 11: CLI `clavum get` command
+## Task 11: CLI `clavum get` command ✅
 **Files:** `packages/cli/src/commands/get.ts` (new), update `src/index.ts`
 - Parse: `clavum get <name> --reason "..."`
 - Look up in vault by name

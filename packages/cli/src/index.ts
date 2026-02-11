@@ -11,7 +11,9 @@
  *   clavum pair <server-url>            Pair with a server
  */
 
+import { del } from './commands/delete.js';
 import { get } from './commands/get.js';
+import { list } from './commands/list.js';
 import { pair } from './commands/pair.js';
 import { store } from './commands/store.js';
 
@@ -72,8 +74,19 @@ async function main() {
       break;
     }
     case 'list':
+      list({ json: args.includes('--json') });
+      break;
+    case 'delete': {
+      const delName = args[1];
+      if (!delName) {
+        console.error('Usage: clavum delete <name> [--force]');
+        process.exit(1);
+      }
+      await del({ name: delName, force: args.includes('--force') });
+      break;
+    }
     case 'audit':
-      console.error(`TODO: ${command} not yet implemented`);
+      console.error('TODO: audit not yet implemented');
       process.exit(1);
       break;
     default:
