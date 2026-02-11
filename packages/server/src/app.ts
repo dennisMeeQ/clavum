@@ -1,4 +1,5 @@
 import { Hono } from 'hono';
+import { audit } from './routes/audit.js';
 import { pair } from './routes/pair.js';
 import { secrets } from './routes/secrets.js';
 import { tenants } from './routes/tenants.js';
@@ -11,3 +12,4 @@ app.get('/health', (c) => c.json({ status: 'ok', service: 'clavum' }));
 app.route('/api/tenants', tenants);
 app.route('/api/pair', pair);
 app.route('/api/secrets', secrets);
+app.route('/api/audit', audit);

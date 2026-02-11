@@ -51,7 +51,7 @@
   - Agent A can't delete Agent B's secrets
   - Duplicate name for same agent → 409
 
-## Task 5: Green retrieval API endpoint
+## Task 5: Green retrieval API endpoint ✅
 **Files:** `packages/server/src/routes/secrets.ts` (continued)
 - `POST /api/secrets/:id/retrieve` — the core green flow on server side
   - Auth middleware → verified agent
