@@ -40,7 +40,7 @@
   - Query by agent, secret, date range
   - Limit works
 
-## Task 4: Secret metadata API
+## Task 4: Secret metadata API ✅
 **Files:** `packages/server/src/routes/secrets.ts` (new)
 - `POST /api/secrets/register` — register metadata (secret_id, name, tier). Auth required.
 - `GET /api/secrets` — list secrets for authenticated agent. Auth required.
