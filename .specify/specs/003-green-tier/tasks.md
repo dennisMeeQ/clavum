@@ -155,7 +155,7 @@
   - Server unreachable + no cache → error
   - `--json` output includes metadata
 
-## Task 12: CLI `clavum list` and `clavum delete`
+## Task 12: CLI `clavum list` and `clavum delete` ✅
 **Files:** `packages/cli/src/commands/list.ts`, `packages/cli/src/commands/delete.ts` (new)
 - List: query vault, display table or `--json`
 - Delete: confirm (or `--force`), delete from vault + server
